@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+ul {
+	list-style: none;
+}
+
+div {
+	border: 1px solid red;
+}
+</style>
+<script type="text/javascript">
+	var interval;
+	var isFocus = true;
+	var alertWin;
+	window.onblur = function() {
+		isFocus = false;
+		if (!interval) {
+			var i = 0;
+			interval = window
+					.setInterval(
+							function() {
+								if (i % 2 == 0) {
+									window.document.title = '【New Message】';
+								} else {
+									window.document.title = '【 $bnsp;$bnsp;$bnsp;$bnsp;$bnsp;$bnsp;】';
+								}
+								if (i == 20) {
+									i = 0;
+									alertWin = window.open('alert.html',
+											'alertWin', 'width=400,height=400');
+								}
+								i++;
+							}, 500);
+		}
+		console.log('lose focus');
+	}
+	window.onfocus = function() {
+		isFocus = true;
+		if (interval) {
+			window.clearInterval(interval);
+			interval = null;
+		}
+		if (alertWin) {
+			alertWin.close();
+		}
+		console.log('get focus');
+	}
+	
+	function openNew(){
+		window.open('alert.html', 'alert', 'width=800,height=500');
+	}
+</script>
+</head>
+<body>
+    <div>
+    	<input type="button" value="click" onClick="openNew()">
+    </div>
+	<div class="searchContentDiv" data-type="console" style="display: inline; position: relative; margin-right: 10px;">
+		<input style="width:110px;padding-right:83px;display:inline;height:17px;border-width:1px;border-radius:4px;">
+		<span
+			style="cursor: pointer; position: absolute; right: 0; top: 0%; width: 17px; height: 17px; background: url('searchdiv/searchbox_button.png') no-repeat;">
+		</span>
+		<span
+			style="cursor: pointer; position: absolute; right: 0; top: 0%; width: 17px; height: 17px; background: url('searchdiv/searchbox_button.png') no-repeat;">
+		</span>
+	</div>
+	<div class="searchResourceDiv" style="padding-top: 5px; width: 50%;">
+		<ul class="searchTree tree" data-options="fit:true">
+			<li><div id="_easyui_tree_330" class="tree-node">
+					<span class="tree-hit tree-expanded"></span><span
+						class="tree-icon tree-folder  tree-folder-open"></span><span
+						class="tree-title">cyberobject(2)</span>
+				</div>
+				<ul style="display: block;">
+					<li><div id="_easyui_tree_331" class="tree-node">
+							<span class="tree-indent"></span><span
+								class="tree-hit tree-expanded"></span><span
+								class="tree-icon tree-folder  tree-folder-open"></span><span
+								class="tree-title">haitao33(2)</span>
+						</div>
+						<ul style="display: block;">
+							<li><div id="_easyui_tree_332" class="tree-node">
+									<span class="tree-indent"></span><span class="tree-indent"></span><span
+										class="tree-hit tree-expanded"></span><span
+										class="tree-icon tree-folder  tree-folder-open"></span><span
+										class="tree-title">Document(2)</span>
+								</div>
+								<ul style="display: block;">
+									<li><div id="_easyui_tree_333" class="tree-node">
+											<span class="tree-indent"></span><span class="tree-indent"></span><span
+												class="tree-indent"></span><span class="tree-indent"></span><span
+												class="tree-icon tree-file tree-file"></span><span
+												class="tree-title">eat_food.vsd</span>
+										</div></li>
+									<li><div id="_easyui_tree_334" class="tree-node">
+											<span class="tree-indent"></span><span class="tree-indent"></span><span
+												class="tree-indent"></span><span
+												class="tree-hit tree-expanded"></span><span
+												class="tree-icon tree-folder tree-folder-open tree-file"></span><span
+												class="tree-title">eat_food_1.rex</span>
+										</div>
+										<ul style="display: block">
+											<li><div id="_easyui_tree_335"
+													class="tree-node tree-node-selected">
+													<span class="tree-indent"></span><span class="tree-indent"></span><span
+														class="tree-indent"></span><span class="tree-indent"></span><span
+														class="tree-indent"></span><span
+														class="tree-icon tree-file content"></span><span
+														class="tree-title">Display a choose card "What
+														ethnic food?" [Chinese, Italian, Japanese]</span>
+												</div></li>
+										</ul></li>
+								</ul></li>
+						</ul></li>
+				</ul></li>
+		</ul>
+	</div>
+</body>
+</html>
