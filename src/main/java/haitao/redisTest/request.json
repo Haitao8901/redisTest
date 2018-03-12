@@ -1,0 +1,140 @@
+{
+    "header": {
+        "action": "SecurityAdminAction",
+        "ip": "",
+        "requestId": "developer.request",
+        "requestTime": 0
+    },
+    "body": {
+        "method": "getApplication",
+        "parameters": {
+            "applicationId":"${applicationId}",
+            "context": {
+                "orgId": "${orgid}",
+                "operatorId": "${userid}",
+                "isAdmin": ${isAdmin}
+            }
+        }
+    }
+}
+
+{
+    "header": {
+        "action": "SecurityManagerAction",
+        "ip": "",
+        "requestId": "developer.request",
+        "requestTime": 0
+    },
+    "body": {
+        "method": "registerOrganize",
+        "parameters": {
+            "userid": "${userid}",
+            "orgid": "${orgid}",
+            "organize": {
+                "id": "${orgid}",
+                "name": "${orgname}",
+                "address": "${address}",
+                "creator":"${userid}",
+				"contactor":"${userid}"
+            },
+            "adminUser": {
+                "id": "${userid}",
+                "name": "${name}",
+                "mustchangepwd": 0,
+                "password": "${password}",
+                "email": "${userid}",
+                "mobile": "${inputphone}",
+                "actived": 1,
+                "pwdexpire": "2099-12-31 23:59:59"
+            }
+        }
+    }
+}
+
+{
+    "header": {
+        "action": "SecurityAdminAction",
+        "ip": "",
+        "requestId": "developer.request",
+        "requestTime": 0
+    },
+    "body": {
+        "method": "getOrganize",
+        "parameters": {
+            "id":"${id}",
+            "context": {
+                "orgId": "",
+                "operatorId": "",
+                "isAdmin": "false"
+            }
+        }
+    }
+}
+
+{
+    "header": {
+        "action": "SecurityAdminAction",
+        "ip": "",
+        "requestId": "developer.request",
+        "requestTime": 0
+    },
+    "body": {
+        "method": "addUser",
+        "parameters": {
+         	"user": {
+                "id": "${userid}",
+                "orgid": "${orgid}",
+                "name": "${name}",
+                "mustchangepwd": 0,
+                "password": "${password}",
+                "email": "${userid}",
+                "mobile": "${inputphone}",
+                "actived": 1,
+                "pwdexpire": "2099-12-31 23:59:59",
+                "isadmin": "false"
+            },
+            "context": {
+                "orgId": "${orgid}",
+                "operatorId": "${userid}",
+                "isAdmin": "false"
+            }
+        }
+    }
+}
+
+		entity.setActived(valueObject.getActived());
+		entity.setEmail(valueObject.getEmail());
+		entity.setId(valueObject.getId());
+		entity.setPassword(Util.encryptPassword(valueObject.getPassword()));
+		entity.setMobile(valueObject.getMobile());
+		entity.setMustchangepwd(valueObject.getMustchangepwd());
+		entity.setName(valueObject.getName());
+		entity.setPwdexpire(valueObject.getPwdexpire());
+		entity.setIsadmin(valueObject.isAdmin());
+		if (valueObject.getOrganizeId() != null)
+			entity.setOrganize(new DbOrganize(valueObject.getOrganizeId()));
+
+			
+			{
+    "header": {
+        "action": "SecurityAdminAction",
+        "ip": "",
+        "requestId": "developer.request",
+        "requestTime": 0
+    },
+    "body": {
+        "method": "setRoleFunctions",
+        "parameters": {
+            "roleId":"${roleId}",
+            "functions": [{
+                "id": "${MODULEID}",
+                "authtype": "1"
+            }],
+            "context": {
+                "orgId": "${orgid}",
+                "operatorId": "${userid}",
+                "isAdmin": ${isAdmin}
+            }
+        }
+    }
+}

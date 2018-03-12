@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+ <canvas id="canvas" width="400px" height="400px"></canvas>
+  <script type="text/javascript">
+ 	var canvas = document.getElementById("canvas");
+ 	var ctx = canvas.getContext("2d");
+ 	var time = 1;
+ 	var refreshTime = 0.016;
+ 	var totalPiceces = 6;
+ 	var radius = 100;
+ 	var color ={'0':"grey",'1':"red", '2':"yellow", '3':"green", '4':"purple", '5':"blue"};
+	var degreePerSecond = 360/time;
+	var refreshDegree = degreePerSecond * refreshTime;
+	var eachDegree = 360/totalPiceces;
+	var rotatedTime = 0;
+	
+	canvas.addEventListener("mousemove", function(event){
+		if(event.region) {
+		    alert("hit region: " + event.region);
+		 }
+	});
+ 	function drawDynamicShape(){
+ 		ctx.save();
+ 		ctx.clearRect(0,0,400, 400);
+ 		ctx.translate(200,200);
+ 	 		for(var i=0; i<totalPiceces; i++){
+ 	 			var start = (i*eachDegree + refreshDegree*(rotatedTime))%360;
+ 	 	 	 	var end = (start + eachDegree )%360==0?360:(start + eachDegree );
+ 	 	 	 	drawShape(start, end, color[(i+1)%6], radius, i);
+ 	 	 	}
+ 	 		rotatedTime++;
+ 	 		ctx.restore();
+ 	 		window.requestAnimationFrame(drawDynamicShape);
+ 	}
+ 	
+ 	function drawShape(start, end, color, radius, order){
+ 		ctx.save();
+ 		var sDeg = start*Math.PI/180;
+ 		var eDeg = end*Math.PI/180;
+
+ 		ctx.beginPath();
+	    ctx.arc(0, 0, radius, sDeg, eDeg);
+	    ctx.fillStyle=color;
+	    ctx.save();
+	    
+	    ctx.rotate(sDeg);
+	    ctx.moveTo(0, 0);
+	    ctx.lineTo(radius,0);
+	    
+	    ctx.restore();
+	    ctx.rotate(eDeg);
+	    ctx.lineTo(radius, 0);
+	    ctx.closePath();
+	    ctx.fill();
+	    
+// 	    ctx.addHitRegion({id: "order-"+order,name:"test" + order});
+	    ctx.restore();
+	    
+	    //add order
+	    ctx.save();
+	    ctx.beginPath();
+	    ctx.moveTo(80,40);
+	    ctx.rotate(sDeg);
+	    ctx.font = "20px serif";
+	    ctx.fillText(order, 30, 30);
+	    ctx.restore();
+	    
+ 	}
+//  	window.setInterval(function(){
+//  		window.requestAnimationFrame(drawDynamicShape);
+//  	}, refreshTime*1000);
+ 	window.requestAnimationFrame(drawDynamicShape);
+ </script>
+</body>
+</html>

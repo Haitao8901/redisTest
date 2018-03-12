@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+ <input id="dd" type="text"/>
+ <script type="text/javascript">
+ var L = '456<abc>&eedg"\'eee888';
+ L = L.replace(/(?:&|<|>|\"|'|`)/ig, function(c) {switch(c){case '&':return "&amp;";case '<':return "&lt;";case '>':return "&gt;";case '"':return "&quot;";case "'":return "&#x27;";case '`':return "&#x60;";}});console.log(L);
+ 
+ function readJsonFile(source, callback) {
+	 
+	    var xhr = new XMLHttpRequest;
+	    xhr.open("GET", source);
+	    xhr.onreadystatechange = function() {
+	        if (xhr.readyState == XMLHttpRequest.DONE) {
+	            var doc = xhr.responseText;
+	            var json = JSON.parse(doc);
+	            callback && callback(json);
+	        }
+	    }
+	   xhr.send();
+	}
+ 
+ function showJson(json){
+	 var textarea = document.createElement("textarea");
+	 document.body.append(textarea);
+	 textarea.value = json;
+	 
+ }
+ try{
+	 
+ readJsonFile('bbb.json', showJson)
+ }catch(e){
+	 
+ }
+//  var textarea = document.createElement("textarea");
+//  document.body.append(textarea);
+//  textarea.value = JSON.stringify(jsonData);
+ </script>
+</body>
+</html>
